@@ -1,0 +1,220 @@
+/*!
+ * Bootstrap v3.1.1 (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE) */
+
+
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+html {
+  font-family: jaf-bernina-sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0
+}
+
+body {
+  margin: 0
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+  display: block
+}
+
+a {
+  background: 0 0
+}
+
+a:active, a:hover {
+  outline: 0
+}
+
+h1 {
+  margin: .67em 0
+}
+
+img {
+  border: 0
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0
+}
+
+button, input, optgroup, select, textarea {
+  outline: none;
+  color: inherit;
+  font: inherit;
+  margin: 0
+}
+
+button {
+  overflow: visible;
+  text-transform: none
+}
+
+button, html input[type=button], input[type=reset], input[type=submit] {
+  -webkit-appearance: button;
+  cursor: pointer
+}
+
+button[disabled], html input[disabled] {
+  cursor: default
+}
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0
+}
+
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0
+}
+
+input[type=checkbox], input[type=radio] {
+  box-sizing: border-box;
+  padding: 0
+}
+
+textarea {
+  overflow: auto
+}
+
+*, :after, :before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+body {
+  line-height: 1.42857
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit
+}
+
+a:focus {
+  outline: dotted thin;
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-offset: -2px
+}
+
+img {
+  vertical-align: middle
+}
+
+p {
+  margin: 0 0 10px
+}
+
+#app {
+  width: 86%;
+  margin: 0 auto;
+  padding: 10px 0;
+  display: flex;
+  font-size: 14px;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+}
+
+.app-logo, .folder-name {
+  line-height: 45px;
+  color: #333;
+  font-size: 24px;
+}
+
+.folder-name {
+  font-size: 18px;
+}
+
+.left-folder {
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.left-folder .folder-list {
+  margin-top: 10px;
+  width: 120px;
+  line-height: 35px;
+  border-top: 1px solid #ececec
+}
+
+.left-folder .folder-list li {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.left-folder .folder-list li.active, .left-folder .folder-list li:hover {
+  color: #0074bf
+}
+
+.left-folder .folder-list .anticon-folder {
+  font-size: 18px;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+
+.left-folder .folder-list a {
+  display: block;
+  color: inherit;
+}
+
+.left-folder .add-folder-btn {
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+  width: 90%;
+}
+
+.container {
+  flex: 1;
+  overflow: hidden
+}
+
+.top-bar {
+  border-bottom: 1px solid #999;
+  position: relative;
+  ;
+}
+
+.top-bar .serach-input {
+  border: none;
+  display: inline-block;
+}
+
+.top-bar .serach-input:focus {
+  box-shadow: none
+}
+
+.top-bar .new-note {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+
+.task-list {
+  line-height: 35px
+}
+
+.task-list li {
+  padding: 22px 0 12px;
+  border-bottom: 1px solid #ececec
+}
