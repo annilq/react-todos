@@ -39,11 +39,12 @@ function wunderlist(
 
     case "ADD_TASK":
       // 新增任务
-      // console.log(action.data);
-      // let task = action.data;
-      // return Object.assign({}, state, {
-      //   tasks: task
-      // });
+      let task = action.data;
+      tasks = Object.assign([], state.tasks);
+      tasks.unshift(task);
+      return Object.assign({}, state, {
+        tasks: tasks
+      });
       break;
     case "GET_TASKS":
       // 获取任务列表
