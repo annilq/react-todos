@@ -1,6 +1,15 @@
-# wunderlist
-a wunderlist like app build with react node and electron
+# react-todos
+### dev
+1. npm i 安装依赖
+2. npm run server 开启服务
+3. npm start 开启客户端
 
+### build
+1. 开发完客户端可以执行npm run build 将前端资源打包
+2. http://localhost:8080/
+
+
+todo
 #### 功能模块：
 - 清单列表
   - 新增,删除,编辑,排序
@@ -11,10 +20,3 @@ a wunderlist like app build with react node and electron
   - 删除
   - 移动
 - 查询功能
-
-#### todo:
-- react搭建静态页面
-- fade data
-- node server
-- mongodb
-- electron

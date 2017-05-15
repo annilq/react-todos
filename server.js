@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(express.static('public'))
+app.use(express.static('build'))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -22,7 +22,7 @@ app.use("/api/tasks", task);
 // START THE SERVER
 // =============================================================================
 app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html')
+  res.sendFile(__dirname + '/build/index.html')
 })
 app.listen(port);
 console.log("Magic happens on port " + port);
