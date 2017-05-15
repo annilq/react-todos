@@ -6,7 +6,7 @@
 
 ### build
 1. 开发完客户端可以执行npm run build 将前端资源打包
-2. http://localhost:8080/
+2. npm run server 并且访问http://localhost:8080/
 
 
 todo
