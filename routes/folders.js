@@ -1,9 +1,19 @@
 var express = require("express");
 var Folder = require("../models/folders");
-
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
+function setIndexFolder(req, res) {
+  var indexFolder = {
+    name: "首页"
+  };
+  var folder = new Folder(); // create a new instance of the Folder model
+  folder.name = indexFolder.name; // set the folders name
+  folder.save(function(err) {
+    if (err) res.send(err);
+    res.json([{ _id: folder.id, name: folder.name }]);
+  });
+}
 
 router
   .route("/")
@@ -20,8 +30,14 @@ router
   })
   .get(function(req, res) {
     Folder.find(function(err, folders) {
+      console.log(folders.length);
       if (err) res.send(err);
-      res.json(folders);
+      // 如果没有目录新增首页目录
+      if (folders.length < 1) {
+        setIndexFolder(req, res);
+      } else {
+        res.json(folders);
+      }
     });
   });
 // 编辑文件夹信息
