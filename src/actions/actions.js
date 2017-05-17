@@ -48,3 +48,29 @@ export function addTask(id, name) {
     });
   };
 }
+export function deleteTask(id) {
+  return function(dispatch, getState) {
+    Request.delete(Request.url + "tasks", {
+      id,
+      name
+    }).then(function(data) {
+      dispatch({ type: "DELETE_TASK", data: data.data });
+    });
+  };
+}
+export function updateTask(id) {
+  return function(dispatch, getState) {
+    Request.put(Request.url + "tasks", {
+      id,
+      name
+    }).then(function(data) {
+      dispatch({ type: "UPDATE_TASK", data: data.data });
+    });
+  };
+}
+export function showTaskDetail(data) {
+  return {
+    type: "TASK_DATA",
+    data
+  };
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Input, Button, Icon } from "antd";
-import { getTasks, getFolderInfo, addTask } from "../actions/actions";
+import { getTasks, getFolderInfo, addTask ,showTaskDetail} from "../actions/actions";
 
 class TaskList extends Component {
   constructor(props) {
@@ -36,10 +36,17 @@ class TaskList extends Component {
     let { tasks } = this.props;
     let taskList;
     if (tasks) {
-      taskList = tasks.map((item, index) => <li key={index}>{item.name}</li>);
+      taskList = tasks.map((item, index) => (
+        <li
+          key={index}
+          onDoubleClick={this.props.showTaskDetail.bind(this, item)}
+        >
+          {item.name}
+        </li>
+      ));
     }
     return (
-      <div className="task-container">
+      <div className="task-container"  style={{ flex: 1 }}>
         <div className="task-header">
           <div className="folder-name">{this.props.folderName}</div>
           <div className="top-bar">
@@ -75,6 +82,9 @@ const mapDispatchToProps = dispatch => {
     },
     addTask(id, value) {
       dispatch(addTask(id, value));
+    },
+    showTaskDetail(data) {
+      dispatch(showTaskDetail(data));
     },
     getFolderInfo(id) {
       dispatch(getFolderInfo(id));

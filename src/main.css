@@ -216,5 +216,30 @@ p {
 
 .task-list li {
   padding: 22px 0 12px;
-  border-bottom: 1px solid #ececec
+  border-bottom: 1px solid #ececec;
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-detail {
+  transition: 150ms width ease;
+  width: 0
+}
+
+.task-detail.active {
+  width: 300px;
+}
+
+.task-detail-field {
+  padding: 10px 0;
+  border-bottom: 1px solid #ececec;
+}
+
+.task-detail-field input,.task-detail-field textarea {
+  border: none;
+  box-shadow: none
+}
+.task-detail-field input:focus,.task-detail-field input:hover,.task-detail-field textarea:focus,.task-detail-field textarea:hover {
+  border: none;
+  box-shadow: none
 }
