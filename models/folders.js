@@ -1,8 +1,9 @@
-var mongoose     = require('mongoose');
-var Schema       = mongoose.Schema;
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-var FolderSchema   = new Schema({
-    name: String
+var FolderSchema = new Schema({
+  name: String,
+  fixed: Boolean
 });
 
-module.exports = mongoose.model('Folder', FolderSchema);
+module.exports = mongoose.model("Folder", FolderSchema);

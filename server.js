@@ -12,7 +12,7 @@ app.use(cors());
 
 var port = process.env.PORT || 8080; // set our port
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/wunderlist");
+mongoose.connect("mongodb://localhost:27017/react-todos");
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 var folders = require('./routes/folders');

@@ -6,22 +6,26 @@ var router = express.Router(); // get an instance of the express Router
 function setIndexFolder() {
   var indexFolder = [
     {
-      name: "home"
+      name: "home",
+      fixed: true
     },
     {
-      name: "like"
+      name: "like",
+      fixed: true
     },
     {
-      name: "done"
+      name: "done",
+      fixed: true
     }
   ];
   let promises = indexFolder.map(function(folderItem) {
     let promise = new Promise(function(resolve, reject) {
       var folder = new Folder(); // create a new instance of the Folder model
       folder.name = folderItem.name; // set the folders name
+      folder.fixed = folderItem.fixed; // set the folders fixed
       folder.save(function(err) {
         if (err) reject(err);
-        resolve({ _id: folder.id, name: folder.name });
+        resolve({ _id: folder.id, name: folder.name,fixed:folder.fixed });
       });
     });
     return promise;
