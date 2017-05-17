@@ -3,16 +3,30 @@ var Folder = require("../models/folders");
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
-function setIndexFolder(req, res) {
-  var indexFolder = {
-    name: "首页"
-  };
-  var folder = new Folder(); // create a new instance of the Folder model
-  folder.name = indexFolder.name; // set the folders name
-  folder.save(function(err) {
-    if (err) res.send(err);
-    res.json([{ _id: folder.id, name: folder.name }]);
+function setIndexFolder() {
+  var indexFolder = [
+    {
+      name: "home"
+    },
+    {
+      name: "like"
+    },
+    {
+      name: "done"
+    }
+  ];
+  let promises = indexFolder.map(function(folderItem) {
+    let promise = new Promise(function(resolve, reject) {
+      var folder = new Folder(); // create a new instance of the Folder model
+      folder.name = folderItem.name; // set the folders name
+      folder.save(function(err) {
+        if (err) reject(err);
+        resolve({ _id: folder.id, name: folder.name });
+      });
+    });
+    return promise;
   });
+  return promises;
 }
 
 router
@@ -34,7 +48,9 @@ router
       if (err) res.send(err);
       // 如果没有目录新增首页目录
       if (folders.length < 1) {
-        setIndexFolder(req, res);
+        Promise.all(setIndexFolder()).then(function(folders) {
+          res.json(folders);
+        });
       } else {
         res.json(folders);
       }
