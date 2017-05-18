@@ -13,6 +13,8 @@ app.use(cors());
 var port = process.env.PORT || 8080; // set our port
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/react-todos");
+// 初始化数据库
+require('./routes/initdb')();
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 var folders = require('./routes/folders');
@@ -25,4 +27,3 @@ app.get('*', (req, res) => {
   res.sendFile(__dirname + '/build/index.html')
 })
 app.listen(port);
-console.log("Magic happens on port " + port);

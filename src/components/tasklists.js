@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Input, Button, Icon } from "antd";
-import { getTasks, getFolderInfo, addTask ,showTaskDetail} from "../actions/actions";
+import {
+  getTasks,
+  getFolderInfo,
+  addTask,
+  showTaskDetail
+} from "../actions/actions";
 
 class TaskList extends Component {
   constructor(props) {
@@ -31,6 +36,9 @@ class TaskList extends Component {
     let { id } = this.props.params;
     let { inputValue } = this.state;
     this.props.addTask(id, inputValue);
+    this.setState({
+      inputValue: ""
+    });
   }
   render() {
     let { tasks } = this.props;
@@ -46,7 +54,7 @@ class TaskList extends Component {
       ));
     }
     return (
-      <div className="task-container"  style={{ flex: 1 }}>
+      <div className="task-container" style={{ flex: 1 }}>
         <div className="task-header">
           <div className="folder-name">{this.props.folderName}</div>
           <div className="top-bar">

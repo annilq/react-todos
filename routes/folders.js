@@ -3,36 +3,6 @@ var Folder = require("../models/folders");
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
-function setIndexFolder() {
-  var indexFolder = [
-    {
-      name: "home",
-      fixed: true
-    },
-    {
-      name: "like",
-      fixed: true
-    },
-    {
-      name: "done",
-      fixed: true
-    }
-  ];
-  let promises = indexFolder.map(function(folderItem) {
-    let promise = new Promise(function(resolve, reject) {
-      var folder = new Folder(); // create a new instance of the Folder model
-      folder.name = folderItem.name; // set the folders name
-      folder.fixed = folderItem.fixed; // set the folders fixed
-      folder.save(function(err) {
-        if (err) reject(err);
-        resolve({ _id: folder.id, name: folder.name,fixed:folder.fixed });
-      });
-    });
-    return promise;
-  });
-  return promises;
-}
-
 router
   .route("/")
   // create a folder (accessed at POST http://localhost:8080/api/folders)
@@ -48,16 +18,8 @@ router
   })
   .get(function(req, res) {
     Folder.find(function(err, folders) {
-      console.log(folders.length);
       if (err) res.send(err);
-      // 如果没有目录新增首页目录
-      if (folders.length < 1) {
-        Promise.all(setIndexFolder()).then(function(folders) {
-          res.json(folders);
-        });
-      } else {
-        res.json(folders);
-      }
+      res.json(folders);
     });
   });
 // 编辑文件夹信息
