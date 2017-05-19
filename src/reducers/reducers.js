@@ -1,10 +1,9 @@
 function wunderlist(
   state = {
     folders: [], //文件夹
-    folderId: -1,
+    folderInfo: {},//文件夹信息
     tasks: [], //任务列表
     taskData: {}, //任务详情
-    folderName: "" //文件夹名字
   },
   action
 ) {
@@ -16,16 +15,10 @@ function wunderlist(
       return Object.assign({}, state, {
         folders: folders
       });
-    case "SET_FOLDERID":
+    case "SET_FOLDER_INFO":
       // 获取当前folderId
       return Object.assign({}, state, {
-        folderId: action.data
-      });
-
-    case "SET_FOLDER_NAME":
-      // 获取当前folderId
-      return Object.assign({}, state, {
-        folderName: action.folderName
+        folderInfo: action.folderInfo
       });
 
     case "ADD_FOLDER":

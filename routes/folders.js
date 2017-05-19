@@ -17,7 +17,7 @@ router
     });
   })
   .get(function(req, res) {
-    Folder.find(function(err, folders) {
+    Folder.find(req.query, function(err, folders) {
       if (err) res.send(err);
       res.json(folders);
     });

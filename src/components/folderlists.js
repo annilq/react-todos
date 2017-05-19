@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import { Modal, Input, Icon, Button } from "antd";
-import {
-  addFolder,
-  getFolders,
-  getTasks
-} from "../actions/actions";
+import { addFolder, setFolderInfo, getFolders } from "../actions/actions";
 class LeftFolder extends Component {
   constructor(props) {
     super(props);
@@ -42,18 +38,19 @@ class LeftFolder extends Component {
       foldername: e.target.value
     });
   }
-  onFolderClick(id) {
-    console.log(id);
+  onFolderClick(folderInfo) {
+    console.log(folderInfo);
+    this.props.setFolderInfo(folderInfo);
   }
   render() {
-    let { folders, folderId } = this.props;
+    let { folders, folderInfo } = this.props;
     let folderList;
     if (folders) {
       folderList = folders.map((item, index) => (
         <li
           key={item._id}
-          onClick={this.onFolderClick.bind(this, item._id)}
-          className={folderId === item._id ? "active" : ""}
+          onClick={this.onFolderClick.bind(this, item)}
+          className={folderInfo.folderId === item._id ? "active" : ""}
         >
           <Link to={"/folders/" + item._id}>
             <Icon type="folder" />{item.name}
@@ -86,10 +83,10 @@ class LeftFolder extends Component {
     );
   }
 }
-const mapStateToProps = ({ folders, folderId }) => {
+const mapStateToProps = ({ folders, folderInfo }) => {
   return {
     folders,
-    folderId
+    folderInfo
   };
 };
 const mapDispatchToProps = dispatch => {
@@ -97,8 +94,8 @@ const mapDispatchToProps = dispatch => {
     addFolder(name) {
       dispatch(addFolder(name));
     },
-    getTasks() {
-      dispatch(getTasks(name));
+    setFolderInfo(data) {
+      dispatch(setFolderInfo(data));
     },
     getFolders() {
       dispatch(getFolders());

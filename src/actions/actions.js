@@ -24,8 +24,24 @@ export function getFolders() {
 export function getFolderInfo(id) {
   return function(dispatch, getState) {
     Request.get(Request.url + "folders/" + id).then(function(data) {
-      dispatch({ type: "SET_FOLDER_NAME", folderName: data.data.name });
+      dispatch(setFolderInfo(data.data));
     });
+  };
+}
+export function getHomeFolderInfo() {
+  return function(dispatch, getState) {
+    Request.get(Request.url + "folders", {
+      params: { type: 1 }
+    }).then(function(data) {
+      console.log(data);
+      dispatch(setFolderInfo(data.data[0]));
+    });
+  };
+}
+export function setFolderInfo(data) {
+  return {
+    type: "SET_FOLDER_INFO",
+    folderInfo: data
   };
 }
 export function getTasks(id) {
@@ -34,7 +50,6 @@ export function getTasks(id) {
       params: { id: id }
     }).then(function(data) {
       dispatch({ type: "GET_TASKS", data: data.data });
-      dispatch({ type: "SET_FOLDERID", data: id });
     });
   };
 }

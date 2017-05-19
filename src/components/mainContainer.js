@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Input, Button, Icon } from "antd";
 import TaskDetail from "./taskdetail";
-class TaskContainer extends Component {
+class MainContainer extends Component {
   render() {
     return (
       <div className="content" style={{ flex: 1, display: "flex" }}>
@@ -21,4 +21,4 @@ class TaskContainer extends Component {
   }
 }
 
-export default TaskContainer;
+export default MainContainer;

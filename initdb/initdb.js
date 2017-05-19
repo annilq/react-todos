@@ -1,4 +1,4 @@
-var Folder = require("./folders");
+var Folder = require("../models/folders");
 function setIndexFolder() {
   var indexFolder = [
     {
@@ -33,8 +33,13 @@ function setIndexFolder() {
   return promises;
 }
 function initdb() {
-  Promise.all(setIndexFolder()).then(function(folders) {
-    console.log(folders);
+  Folder.find(function(err, folders) {
+    if (err) res.send(err);
+    if (folders.length < 1) {
+      Promise.all(setIndexFolder()).then(function(folders) {
+        console.log(folders);
+      });
+    }
   });
 }
 module.exports = initdb;

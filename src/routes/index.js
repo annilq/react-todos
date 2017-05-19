@@ -1,6 +1,7 @@
 // 后台组件
 import App from "../App";
-import TaskList from "../components/tasklists";
+import MainTasks from "../components/maintasksContainer";
+import HomeTasks from "../components/hometasksContainer";
 import TaskDetail from "../components/taskdetail";
 const routes = {
   path: "/",
@@ -9,11 +10,11 @@ const routes = {
   childRoutes: [
     {
       path: "/home",
-      component: TaskList
+      component: HomeTasks
     },
     {
       path: "/folders/:id",
-      component: TaskList
+      component: MainTasks
     },
     {
       path: "/taskdetail/:id",
