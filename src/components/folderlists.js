@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import { Modal, Input, Icon, Button } from "antd";
 import { addFolder, setFolderInfo, getFolders } from "../actions/actions";
-class LeftFolder extends Component {
+class FolderList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -102,8 +102,8 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-let LeftFolderContainer = connect(mapStateToProps, mapDispatchToProps)(
-  LeftFolder
+let FolderListContainer = connect(mapStateToProps, mapDispatchToProps)(
+  FolderList
 );
 
-export default LeftFolderContainer;
+export default FolderListContainer;

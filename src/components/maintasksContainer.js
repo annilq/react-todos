@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getTasks, getHomeFolderInfo } from "../actions/actions";
+import { getTasks, getHomeFolderInfo, getFolderInfo } from "../actions/actions";
 import TaskList from "./tasklists";
 import TaskListHeader from "./tasklistHeader";
 class MainTask extends Component {
   componentDidMount() {
     let { id } = this.props.params;
-    this.props.getTasks(id);
+    if (id) {
+      this.props.getFolderInfo(id);
+    } else {
+      this.props.getHomeFolderInfo();
+    }
   }
   componentWillReceiveProps(nextProps) {
-    let curid = this.props.params.id;
-    let nextid = nextProps.params.id;
-    if (curid !== nextid) {
-      this.props.getTasks(nextid);
+    let { folderInfo } = this.props;
+    let curid = folderInfo._id;
+    let nextId = nextProps.folderInfo && nextProps.folderInfo._id;
+    if (curid !== nextId) {
+      this.props.getTasks(nextId);
     }
   }
   render() {
@@ -35,6 +40,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getHomeFolderInfo() {
       dispatch(getHomeFolderInfo());
+    },
+    getFolderInfo(id) {
+      dispatch(getFolderInfo(id));
     },
     getTasks(id) {
       dispatch(getTasks(id));
