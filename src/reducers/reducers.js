@@ -10,13 +10,13 @@ function wunderlist(
   let folders, tasks;
   switch (action.type) {
     case "SET_FOLDERS":
-      // 获取当前文件夹
+      // 设置当前文件夹
       folders = [...action.data];
       return Object.assign({}, state, {
         folders: folders
       });
     case "SET_FOLDER_INFO":
-      // 获取当前folderId
+      // 设置当前folderId
       return Object.assign({}, state, {
         folderInfo: action.folderInfo
       });
@@ -27,7 +27,7 @@ function wunderlist(
         taskData
       });
     case "SET_TASKS":
-      // 获取任务列表
+      // 设置任务列表
       tasks = [...action.data];
       return Object.assign({}, state, {
         tasks
