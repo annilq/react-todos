@@ -3,17 +3,17 @@ function setIndexFolder() {
   var indexFolder = [
     {
       name: "home",
-      type: 1,
+      type: "home",
       fixed: true
     },
     {
-      name: "like",
-      type: 2,
+      name: "star",
+      type: "star",
       fixed: true
     },
     {
       name: "done",
-      type: 3,
+      type: "done",
       fixed: true
     }
   ];

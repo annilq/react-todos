@@ -39,7 +39,6 @@ class FolderList extends Component {
     });
   }
   onFolderClick(folderInfo) {
-    console.log(folderInfo);
     this.props.setFolderInfo(folderInfo);
   }
   render() {
@@ -52,8 +51,11 @@ class FolderList extends Component {
           onClick={this.onFolderClick.bind(this, item)}
           className={folderInfo.folderId === item._id ? "active" : ""}
         >
-          <Link to={"/folders/" + item._id}>
-            <Icon type="folder" />{item.name}
+          <Link
+            to={item.type === "folder" ? "/folders/" + item._id : "/"+item.type}
+          >
+            <Icon type={item.type === "done" ? "check-square-o" : item.type} />
+            {item.name}
           </Link>
         </li>
       ));
@@ -61,23 +63,6 @@ class FolderList extends Component {
     return (
       <div className="left-folder">
         <div className="app-logo">react-todos</div>
-        <ul className="folder-list">
-          <li onClick={this.onFolderClick.bind(this)}>
-            <Link to={"/home"}>
-              <Icon type="home" />home
-            </Link>
-          </li>
-          <li onClick={this.onFolderClick.bind(this)}>
-            <Link to={"/like"}>
-              <Icon type="star" />like
-            </Link>
-          </li>
-          <li onClick={this.onFolderClick.bind(this)}>
-            <Link to={"/done"}>
-              <Icon type="check" />done
-            </Link>
-          </li>
-        </ul>
         <ul className="folder-list">
           {folderList}
         </ul>

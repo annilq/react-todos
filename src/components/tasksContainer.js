@@ -1,23 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getTasks, getHomeFolderInfo, getFolderInfo } from "../actions/actions";
+import {
+  getTasks,
+  getTasksbyParam,
+  getFolderInfoByType,
+  getFolderInfoById
+} from "../actions/actions";
 import TaskList from "./tasklists";
 import TaskListHeader from "./tasklistHeader";
 class MainTask extends Component {
   componentDidMount() {
     let { id } = this.props.params;
+    let { params } = this.props.route;
     if (id) {
-      this.props.getFolderInfo(id);
+      this.props.getFolderInfoById(id);
     } else {
-      this.props.getHomeFolderInfo();
+      this.props.getFolderInfoByType(params.type);
     }
   }
   componentWillReceiveProps(nextProps) {
+    let nextparams = nextProps.route.params;
     let { folderInfo } = this.props;
     let curid = folderInfo._id;
     let nextId = nextProps.folderInfo && nextProps.folderInfo._id;
     if (curid !== nextId) {
-      this.props.getTasks(nextId);
+      if (nextparams && nextparams.query) {
+        this.props.getTasksbyParam(nextparams.query);
+      } else {
+        this.props.getTasks(nextId);
+      }
     }
   }
   render() {
@@ -38,11 +49,14 @@ const mapStateToProps = ({ tasks, folderInfo }) => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    getHomeFolderInfo() {
-      dispatch(getHomeFolderInfo());
+    getFolderInfoByType(type) {
+      dispatch(getFolderInfoByType(type));
     },
-    getFolderInfo(id) {
-      dispatch(getFolderInfo(id));
+    getFolderInfoById(id) {
+      dispatch(getFolderInfoById(id));
+    },
+    getTasksbyParam(params) {
+      dispatch(getTasksbyParam(params));
     },
     getTasks(id) {
       dispatch(getTasks(id));

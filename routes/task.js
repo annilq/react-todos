@@ -11,7 +11,9 @@ router
   .post(function(req, res) {
     var task = new Task(); // create a new instance of the Bear model
     task.name = req.body.name; // set the tasks name (comes from the request)
-    task.folderId = req.body.id;
+    if (req.body.id) {
+      task.folderId = req.body.id;
+    }
     console.log(task.name);
     // save the task and check for errors
     task.save(function(err, taskitem) {
@@ -20,18 +22,10 @@ router
     });
   })
   .get(function(req, res) {
-    const { id } = req.query;
-    if (id) {
-      Task.find({ folderId: id }, function(err, tasks) {
-        if (err) res.send(err);
-        res.json(tasks);
-      });
-    } else {
-      Task.find(function(err, tasks) {
-        if (err) res.send(err);
-        res.json(tasks);
-      });
-    }
+    Task.find(req.query, function(err, tasks) {
+      if (err) res.send(err);
+      res.json(tasks);
+    });
   });
 // 单个任务操作
 router

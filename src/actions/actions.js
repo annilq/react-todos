@@ -24,19 +24,18 @@ export function getFolders() {
     });
   };
 }
-export function getFolderInfo(id) {
+export function getFolderInfoById(id) {
   return function(dispatch, getState) {
     Request.get(`${Request.url}/folders/${id}`).then(function(data) {
       dispatch(setFolderInfo(data.data));
     });
   };
 }
-export function getHomeFolderInfo() {
+export function getFolderInfoByType(type) {
   return function(dispatch, getState) {
     Request.get(`${Request.url}/folders`, {
-      params: { type: 1 }
+      params: { type: type }
     }).then(function(data) {
-      console.log(data);
       dispatch(setFolderInfo(data.data[0]));
     });
   };
@@ -50,12 +49,26 @@ export function setFolderInfo(data) {
 export function getTasks(id) {
   return function(dispatch, getState) {
     Request.get(`${Request.url}/tasks`, {
-      params: { id: id }
+      params: { folderId: id }
     }).then(function(data) {
       dispatch({ type: "SET_TASKS", data: data.data });
     });
   };
 }
+export function getTasksbyParam(params) {
+  return function(dispatch, getState) {
+    Request.get(`${Request.url}/tasks`, {
+      params
+    }).then(function(data) {
+      dispatch({ type: "SET_TASKS", data: data.data });
+    });
+  };
+}
+/**
+ * 新增项目，无id则表示在首页新增
+ * @param {[type]} id   [目录id]
+ * @param {[type]} name [description]
+ */
 export function addTask(id, name) {
   return function(dispatch, getState) {
     let state = getState();

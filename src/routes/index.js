@@ -1,6 +1,6 @@
 // 后台组件
 import App from "../App";
-import MainTasks from "../components/maintasksContainer";
+import CSTasks from "../components/tasksContainer";
 import TaskDetail from "../components/taskdetail";
 const routes = {
   path: "/",
@@ -9,22 +9,22 @@ const routes = {
   childRoutes: [
     {
       path: "/home",
-      params: { type: 1 },
-      component: MainTasks
+      params: { type: "home" },
+      component: CSTasks
     },
     {
-      path: "/like",
-      params: { type: 2 },
-      component: MainTasks
+      path: "/star",
+      params: { type: "star", query: { star: true } },
+      component: CSTasks
     },
     {
       path: "/done",
-      params: { type: 3 },
-      component: MainTasks
+      params: { type: "done", query: { status: 1 } },
+      component: CSTasks
     },
     {
       path: "/folders/:id",
-      component: MainTasks
+      component: CSTasks
     },
     {
       path: "/tasks/:id",

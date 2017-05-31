@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var FolderSchema = new Schema({
   name: String,
-  type: Number,
+  type: { type: String, default: "folder" },
   fixed: Boolean
 });
 
