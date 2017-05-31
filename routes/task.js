@@ -14,9 +14,9 @@ router
     task.folderId = req.body.id;
     console.log(task.name);
     // save the task and check for errors
-    task.save(function(err) {
+    task.save(function(err, taskitem) {
       if (err) res.send(err);
-      res.json({ _id: task._id, name: task.name });
+      res.json(taskitem);
     });
   })
   .get(function(req, res) {

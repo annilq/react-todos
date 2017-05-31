@@ -23,9 +23,9 @@ function setIndexFolder() {
       folder.name = folderItem.name; // set the folders name
       folder.fixed = folderItem.fixed; // set the folders fixed
       folder.type = folderItem.type; // set the folders type
-      folder.save(function(err) {
+      folder.save(function(err,folder) {
         if (err) reject(err);
-        resolve({ _id: folder.id, name: folder.name, fixed: folder.fixed });
+        resolve(folder);
       });
     });
     return promise;

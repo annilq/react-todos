@@ -11,9 +11,9 @@ router
     folder.name = req.body.name; // set the folders name (comes from the request)
     console.log(folder.name);
     // save the folder and check for errors
-    folder.save(function(err) {
+    folder.save(function(err, folderitem) {
       if (err) res.send(err);
-      res.json({ _id: folder._id, name: folder.name });
+      res.json(folderitem);
     });
   })
   .get(function(req, res) {
@@ -40,7 +40,6 @@ router
       // save the folder
       folder.save(function(err) {
         if (err) res.send(err);
-
         res.json({ message: "Folder updated!" });
       });
     });
@@ -52,7 +51,6 @@ router
       },
       function(err, folder) {
         if (err) res.send(err);
-
         res.json({ message: "Successfully deleted" });
       }
     );

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TaskItem from "./taskItem";
 class TaskList extends Component {
   render() {
-    let { tasks} = this.props;
+    let { tasks } = this.props;
     let taskList;
     if (tasks) {
       taskList = tasks.map((item, index) => (
@@ -10,11 +10,9 @@ class TaskList extends Component {
       ));
     }
     return (
-      <div className="task-container" style={{ flex: 1 }}>
-        <ul className="task-list">
-          {taskList}
-        </ul>
-      </div>
+      <ul className="task-list">
+        {taskList}
+      </ul>
     );
   }
 }

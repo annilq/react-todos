@@ -79,19 +79,10 @@ export function deleteTask(id) {
     });
   };
 }
-export function updateTask(id) {
+export function updateTask(task) {
   return function(dispatch, getState) {
-    Request.put(`${Request.url}/tasks/`, {
-      id,
-      name
-    }).then(function(data) {
+    Request.put(`${Request.url}/tasks/${task._id}`, task).then(function(data) {
       dispatch({ type: "UPDATE_TASK", data: data.data });
     });
-  };
-}
-export function showTaskDetail(data) {
-  return {
-    type: "TASK_DATA",
-    data
   };
 }

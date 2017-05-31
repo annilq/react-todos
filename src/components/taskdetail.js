@@ -7,23 +7,36 @@ class TaskDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      taskData: {},
+      remark: "",
       subtask: ""
     };
   }
-  onKeyPress(e) {
-    if (e.key === "Enter") {
-      console.log("submit");
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      console.log(nextProps);
+      this.setState({ taskData: nextProps.taskData });
     }
   }
-  onChange(e) {
-    this.setState({ subtask: e.target.value });
+  onKeyPress(e) {
+    if (e.key === "Enter") {
+      let { taskData } = this.state;
+      let subtask = taskData.subtask || [];
+      console.log(e.target.value);
+      subtask.push(e.target.value);
+      taskData.subtask = subtask;
+      this.setState({ taskData, subtask: "" });
+    }
+  }
+  onChange(key, e) {
+    this.setState({ [key]: e.target.value });
   }
   render() {
-    let { taskData } = this.props;
-    let { subtask } = taskData;
-    let SubCom;
-    if (subtask) {
-      let subtasks = subtask.map((item, index) => <li key={index}>item</li>);
+    let { taskData } = this.state;
+    let subtask = taskData.subtask || [];
+    let SubCom = "";
+    if (subtask.length > 0) {
+      let subtasks = subtask.map((item, index) => <li key={index}>{item}</li>);
       SubCom = <div className="subtask-list task-detail-field">{subtasks}</div>;
     }
     return (
@@ -34,16 +47,17 @@ class TaskDetail extends Component {
           <Input
             value={this.state.subtask}
             placeholder="添加子任务"
+            onChange={this.onChange.bind(this, "subtask")}
             onKeyPress={this.onKeyPress.bind(this)}
-            onChange={this.onChange.bind(this)}
           />
         </div>
         <div className="task-detail-field">
           <Input
             type="textarea"
             rows={4}
-            value={taskData.remark}
+            value={this.state.remark}
             placeholder="填写备注"
+            onChange={this.onChange.bind(this, "remark")}
           />
         </div>
       </div>

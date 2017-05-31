@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var TaskSchema = new Schema({
   name: String,
   remark: String,
+  star: { type: Boolean, default: false },
   subtask: Array,
   folderId: String
 });

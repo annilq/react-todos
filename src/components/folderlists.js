@@ -62,6 +62,23 @@ class FolderList extends Component {
       <div className="left-folder">
         <div className="app-logo">react-todos</div>
         <ul className="folder-list">
+          <li onClick={this.onFolderClick.bind(this)}>
+            <Link to={"/home"}>
+              <Icon type="home" />home
+            </Link>
+          </li>
+          <li onClick={this.onFolderClick.bind(this)}>
+            <Link to={"/like"}>
+              <Icon type="star" />like
+            </Link>
+          </li>
+          <li onClick={this.onFolderClick.bind(this)}>
+            <Link to={"/done"}>
+              <Icon type="check" />done
+            </Link>
+          </li>
+        </ul>
+        <ul className="folder-list">
           {folderList}
         </ul>
         <Button className="add-folder-btn" onClick={this.showModal.bind(this)}>
