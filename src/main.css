@@ -215,12 +215,23 @@ p {
 }
 
 .task-list li {
-  padding: 22px 0 12px;
+  padding: 7px 0;
   border-bottom: 1px solid #ececec;
   cursor: pointer;
   user-select: none;
 }
-
+.task-button{
+  text-align: right;
+  width: 100px;
+  overflow: hidden;
+  display: none;
+}
+.task-list li:hover .task-button{
+  display: block;
+}
+.edit-button,.delete-button{
+  margin-right: 10px;
+}
 .task-detail {
   transition: 150ms width ease;
   width: 0

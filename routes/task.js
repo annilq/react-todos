@@ -60,7 +60,6 @@ router
       },
       function(err, folder) {
         if (err) res.send(err);
-
         res.json({ message: "Successfully deleted" });
       }
     );
