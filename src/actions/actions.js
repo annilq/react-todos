@@ -94,8 +94,15 @@ export function deleteTask(id) {
 }
 export function updateTask(task) {
   return function(dispatch, getState) {
+    let state = getState();
+    let { tasks } = state;
     Request.put(`${Request.url}/tasks/${task._id}`, task).then(function(data) {
-      dispatch({ type: "UPDATE_TASK", data: data.data });
+      tasks.forEach(item => {
+        if (item._id === task._id) {
+          item = Object.assign(item, task);
+        }
+      });
+      dispatch({ type: "SET_TASKS", data: tasks });
     });
   };
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteTask, updateTask } from "../actions/actions";
-import { Button, Modal } from "antd";
+import { Button, Modal, Checkbox } from "antd";
 const confirm = Modal.confirm;
 class TaskItem extends Component {
   showTask() {
@@ -9,10 +9,19 @@ class TaskItem extends Component {
   }
   render() {
     let { task } = this.props;
-    console.log(task);
     return (
-      <li onClick={this.showTask.bind(this, task)} style={{ display: "flex" }}>
-        <div className="task-text" style={{ flex: "1" }}>{task.name}</div>
+      <li style={{ display: "flex" }}>
+        <Checkbox
+          onChange={this.props.setStatus.bind(this, task)}
+          checked={task.status}
+        />
+        <div
+          onClick={this.showTask.bind(this, task)}
+          className="task-text"
+          style={{ flex: "1" }}
+        >
+          {task.name}
+        </div>
         <div className="task-button">
           <Button
             className="edit-button"
@@ -33,10 +42,20 @@ class TaskItem extends Component {
     );
   }
 }
+const mapStateToProps = ({ tasks }) => {
+  return {
+    tasks
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     starTask(task) {
       task.star = !task.star;
+      dispatch(updateTask(task));
+    },
+    setStatus(task) {
+      task.status = !task.status;
       dispatch(updateTask(task));
     },
     delConform(id) {
@@ -51,5 +70,5 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-let TaskItemContainer = connect(null, mapDispatchToProps)(TaskItem);
+let TaskItemContainer = connect(mapStateToProps, mapDispatchToProps)(TaskItem);
 export default TaskItemContainer;
