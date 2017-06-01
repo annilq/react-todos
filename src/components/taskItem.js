@@ -66,7 +66,7 @@ class TaskItem extends Component {
               type="danger"
               shape="circle"
               icon="delete"
-              onClick={this.props.delConform.bind(this, task._id)}
+              onClick={this.props.delConfirm.bind(this, task._id)}
             />
           </div>
         </div>
@@ -110,7 +110,7 @@ const mapDispatchToProps = dispatch => {
     updateLocalTask(task) {
       dispatch(updateLocalTask(task));
     },
-    delConform(id) {
+    delConfirm(id) {
       confirm({
         title: "删除",
         content: "确定删除当前项目?",

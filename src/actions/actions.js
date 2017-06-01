@@ -17,6 +17,32 @@ export function addFolder(name) {
     });
   };
 }
+export function updateFolder(name, id) {
+  return function(dispatch, getState) {
+    let state = getState();
+    let { folders } = state;
+    Request.put(`${Request.url}/folders/${id}`, {
+      name: name
+    }).then(function(data) {
+      folders.forEach(item => {
+        if (item._id === id) {
+          item = Object.assign(item, data.data);
+        }
+      });
+      dispatch({ type: "SET_FOLDERS", data: folders });
+    });
+  };
+}
+export function deleteFolder(id) {
+  return function(dispatch, getState) {
+    let state = getState();
+    let { folders } = state;
+    Request.delete(`${Request.url}/folders/${id}`).then(function(data) {
+      folders = folders.filter(item => item._id !== id);
+      dispatch({ type: "SET_FOLDERS", data: folders });
+    });
+  };
+}
 export function getFolders() {
   return function(dispatch, getState) {
     Request.get(`${Request.url}/folders`).then(function(data) {

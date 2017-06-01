@@ -1,5 +1,6 @@
 var express = require("express");
 var Folder = require("../models/folders");
+var Task = require("../models/tasks");
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
@@ -38,9 +39,9 @@ router
       if (err) res.send(err);
       folder.name = req.body.name; // update the folders info
       // save the folder
-      folder.save(function(err) {
+      folder.save(function(err, folderitem) {
         if (err) res.send(err);
-        res.json({ message: "Folder updated!" });
+        res.json(folderitem);
       });
     });
   })
@@ -51,7 +52,16 @@ router
       },
       function(err, folder) {
         if (err) res.send(err);
-        res.json({ message: "Successfully deleted" });
+        Task.remove(
+          {
+            folderId: req.params.id
+          },
+          function(err, folder) {
+            if (err) res.send(err);
+            console.log("delete all");
+            res.json({ message: "Successfully deleted" });
+          }
+        );
       }
     );
   });

@@ -1,7 +1,7 @@
 # react-todos
 ### dev
 1. npm i 安装依赖
-2. npm run server 开启服务
+2. npm run server 开启并且初始化服务
 3. npm start 开启客户端
 
 ### build
@@ -12,11 +12,10 @@
 todo
 #### 功能模块：
 - 清单列表
-  - 新增,删除,编辑,排序
-- 任务列表
-  - star,标记状态,置顶,新增
+  - 新增,删除,编辑
 - 任务详情
   - 编辑
   - 删除
-  - 移动
+  - star
+  - 标记状态
 - 查询功能

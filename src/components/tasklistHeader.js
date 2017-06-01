@@ -23,9 +23,10 @@ class TaskListHeader extends Component {
     });
   }
   render() {
-    return (
-      <div className="task-header">
-        <div className="folder-name">{this.props.folderInfo.name}</div>
+    let { folderInfo } = this.props;
+    let addInputcom = "";
+    if (folderInfo.name !== "star" && folderInfo.name !== "done") {
+      addInputcom = (
         <div className="top-bar">
           <Input
             type="text"
@@ -38,6 +39,12 @@ class TaskListHeader extends Component {
             <Icon type="plus" />添加
           </Button>
         </div>
+      );
+    }
+    return (
+      <div className="task-header">
+        <div className="folder-name">{folderInfo.name}</div>
+        {addInputcom}
       </div>
     );
   }
