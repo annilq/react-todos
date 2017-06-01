@@ -12,15 +12,15 @@ router
     folder.name = req.body.name; // set the folders name (comes from the request)
     console.log(folder.name);
     // save the folder and check for errors
-    folder.save(function(err, folderitem) {
+    folder.save(function(err, data) {
       if (err) res.send(err);
-      res.json(folderitem);
+      res.json({ code: 0, data: data, message: "添加成功" });
     });
   })
   .get(function(req, res) {
     Folder.find(req.query, function(err, folders) {
       if (err) res.send(err);
-      res.json(folders);
+      res.json({ code: 0, data: folders, message: "" });
     });
   });
 // 编辑文件夹信息
@@ -29,7 +29,7 @@ router
   .get(function(req, res) {
     Folder.findById(req.params.id, function(err, folder) {
       if (err) res.send(err);
-      res.json(folder);
+      res.json({ code: 0, data: folder, message: "" });
     });
   })
   // create a folder (accessed at POST http://localhost:8080/api/folders)
@@ -41,7 +41,7 @@ router
       // save the folder
       folder.save(function(err, folderitem) {
         if (err) res.send(err);
-        res.json(folderitem);
+        res.json({ code: 0, data: folderitem, message: "更新成功" });
       });
     });
   })
@@ -52,14 +52,15 @@ router
       },
       function(err, folder) {
         if (err) res.send(err);
+        console.log("目录删除成功");
         Task.remove(
           {
             folderId: req.params.id
           },
           function(err, folder) {
             if (err) res.send(err);
-            console.log("delete all");
-            res.json({ message: "Successfully deleted" });
+            console.log("项目删除成功");
+            res.json({ message: "项目删除成功" });
           }
         );
       }

@@ -1,15 +1,12 @@
-import axios from "axios";
-let Request = axios;
-Request.url = "http://127.0.0.1:8080/api";
-
+import Request from "../util/request";
 export function addFolder(name) {
   return function(dispatch, getState) {
     let state = getState();
     let { folders } = state;
-    Request.post(`${Request.url}/folders`, {
+    Request.post("/folders", {
       name: name
     }).then(function(data) {
-      folders.push(data.data);
+      folders.push(data);
       dispatch({
         type: "SET_FOLDERS",
         data: folders
@@ -21,12 +18,12 @@ export function updateFolder(name, id) {
   return function(dispatch, getState) {
     let state = getState();
     let { folders } = state;
-    Request.put(`${Request.url}/folders/${id}`, {
+    Request.put(`/folders/${id}`, {
       name: name
     }).then(function(data) {
       folders.forEach(item => {
         if (item._id === id) {
-          item = Object.assign(item, data.data);
+          item = Object.assign(item, data);
         }
       });
       dispatch({ type: "SET_FOLDERS", data: folders });
@@ -37,7 +34,7 @@ export function deleteFolder(id) {
   return function(dispatch, getState) {
     let state = getState();
     let { folders } = state;
-    Request.delete(`${Request.url}/folders/${id}`).then(function(data) {
+    Request.delete(`/folders/${id}`).then(function(data) {
       folders = folders.filter(item => item._id !== id);
       dispatch({ type: "SET_FOLDERS", data: folders });
     });
@@ -45,24 +42,24 @@ export function deleteFolder(id) {
 }
 export function getFolders() {
   return function(dispatch, getState) {
-    Request.get(`${Request.url}/folders`).then(function(data) {
-      dispatch({ type: "SET_FOLDERS", data: data.data });
+    Request.get("/folders").then(function(data) {
+      dispatch({ type: "SET_FOLDERS", data: data });
     });
   };
 }
 export function getFolderInfoById(id) {
   return function(dispatch, getState) {
-    Request.get(`${Request.url}/folders/${id}`).then(function(data) {
-      dispatch(setFolderInfo(data.data));
+    Request.get(`/folders/${id}`).then(function(data) {
+      dispatch(setFolderInfo(data));
     });
   };
 }
 export function getFolderInfoByType(type) {
   return function(dispatch, getState) {
-    Request.get(`${Request.url}/folders`, {
-      params: { type: type }
+    Request.get("/folders", {
+      type: type
     }).then(function(data) {
-      dispatch(setFolderInfo(data.data[0]));
+      dispatch(setFolderInfo(data[0]));
     });
   };
 }
@@ -74,19 +71,17 @@ export function setFolderInfo(data) {
 }
 export function getTasks(id) {
   return function(dispatch, getState) {
-    Request.get(`${Request.url}/tasks`, {
-      params: { folderId: id }
+    Request.get("/tasks", {
+      folderId: id
     }).then(function(data) {
-      dispatch({ type: "SET_TASKS", data: data.data });
+      dispatch({ type: "SET_TASKS", data: data });
     });
   };
 }
 export function getTasksbyParam(params) {
   return function(dispatch, getState) {
-    Request.get(`${Request.url}/tasks`, {
-      params
-    }).then(function(data) {
-      dispatch({ type: "SET_TASKS", data: data.data });
+    Request.get("/tasks", params).then(function(data) {
+      dispatch({ type: "SET_TASKS", data: data });
     });
   };
 }
@@ -99,11 +94,11 @@ export function addTask(id, name) {
   return function(dispatch, getState) {
     let state = getState();
     let { tasks } = state;
-    Request.post(`${Request.url}/tasks`, {
+    Request.post("/tasks", {
       id,
       name
     }).then(function(data) {
-      tasks.unshift(data.data);
+      tasks.unshift(data);
       dispatch({ type: "SET_TASKS", data: tasks });
     });
   };
@@ -112,7 +107,7 @@ export function deleteTask(id) {
   return function(dispatch, getState) {
     let state = getState();
     let { tasks } = state;
-    Request.delete(`${Request.url}/tasks/${id}`).then(function(data) {
+    Request.delete(`/tasks/${id}`).then(function(data) {
       tasks = tasks.filter(item => item._id !== id);
       dispatch({ type: "SET_TASKS", data: tasks });
     });
@@ -141,7 +136,7 @@ export function updateRemoteTask(task) {
   return function(dispatch, getState) {
     let state = getState();
     let { tasks } = state;
-    Request.put(`${Request.url}/tasks/${task._id}`, task).then(function(data) {
+    Request.put(`/tasks/${task._id}`, task).then(function(data) {
       tasks.forEach(item => {
         if (item._id === task._id) {
           item = Object.assign(item, task);

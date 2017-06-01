@@ -18,13 +18,13 @@ router
     // save the task and check for errors
     task.save(function(err, taskitem) {
       if (err) res.send(err);
-      res.json(taskitem);
+      res.json({ code: 0, data: taskitem, message: "添加成功" });
     });
   })
   .get(function(req, res) {
     Task.find(req.query, function(err, tasks) {
       if (err) res.send(err);
-      res.json(tasks);
+      res.json({ code: 0, data: tasks, message: "" });
     });
   });
 // 单个任务操作
@@ -33,7 +33,7 @@ router
   .get(function(req, res) {
     Task.findById(req.params.d, function(err, task) {
       if (err) res.send(err);
-      res.json(task);
+      res.json({ code: 0, data: task, message: "" });
     });
   })
   .put(function(req, res) {
@@ -41,9 +41,9 @@ router
       if (err) res.send(err);
       task = Object.assign(task, req.body); // update the tasks info
       // save the task
-      task.save(function(err) {
+      task.save(function(err, data) {
         if (err) res.send(err);
-        res.json({ message: "task updated!" });
+        res.json({ code: 0, data: data, message: "更新成功" });
       });
     });
   })
@@ -54,7 +54,7 @@ router
       },
       function(err, folder) {
         if (err) res.send(err);
-        res.json({ message: "Successfully deleted" });
+        res.json({ code: 0, data: null, message: "删除成功" });
       }
     );
   });
