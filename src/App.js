@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Input, Button, Icon } from "antd";
 import FolderListContainer from "./components/folderlists";
-import TaskDetail from "./components/taskdetail";
 class App extends Component {
   render() {
     return (
@@ -18,7 +17,6 @@ class App extends Component {
               <Button className="new-note">查询</Button>
             </div>
             {this.props.children}
-            <TaskDetail />
           </div>
       </div>
     );

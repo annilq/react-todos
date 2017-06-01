@@ -1,7 +1,6 @@
 // 后台组件
 import App from "../App";
 import CSTasks from "../components/tasksContainer";
-import TaskDetail from "../components/taskdetail";
 const routes = {
   path: "/",
   component: App,
@@ -25,10 +24,6 @@ const routes = {
     {
       path: "/folders/:id",
       component: CSTasks
-    },
-    {
-      path: "/tasks/:id",
-      component: TaskDetail
     }
   ]
 };

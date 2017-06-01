@@ -92,7 +92,26 @@ export function deleteTask(id) {
     });
   };
 }
-export function updateTask(task) {
+// 更新任务
+/**
+ * [updateTask 更新任务]
+ * @param  {Number} [remote=1] [跟新本地任务详情]
+ * @return [type]              [description]
+ */
+export function updateLocalTask(task) {
+  return function(dispatch, getState) {
+    let state = getState();
+    let { tasks } = state;
+    tasks.forEach(item => {
+      if (item._id === task._id) {
+        item = Object.assign(item, task);
+      }
+    });
+    dispatch({ type: "SET_TASKS", data: tasks });
+  };
+}
+// 更新远程任务
+export function updateRemoteTask(task) {
   return function(dispatch, getState) {
     let state = getState();
     let { tasks } = state;

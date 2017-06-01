@@ -189,14 +189,14 @@ p {
 }
 
 .top-bar {
-  border-bottom: 1px solid #999;
   position: relative;
-  ;
 }
 
 .top-bar .serach-input {
-  border: none;
   display: inline-block;
+  border: none;
+  border-bottom: 1px solid #999;
+  border-radius: 0
 }
 
 .top-bar .serach-input:focus {
@@ -220,37 +220,16 @@ p {
   cursor: pointer;
   user-select: none;
 }
+.task-list li .edit-item input{
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
 .task-button{
   text-align: right;
   width: 100px;
   overflow: hidden;
-  display: none;
-}
-.task-list li:hover .task-button{
-  display: block;
 }
 .edit-button,.delete-button{
   margin-right: 10px;
-}
-.task-detail {
-  transition: 150ms width ease;
-  width: 0
-}
-
-.task-detail.active {
-  width: 300px;
-}
-
-.task-detail-field {
-  padding: 10px 0;
-  border-bottom: 1px solid #ececec;
-}
-
-.task-detail-field input,.task-detail-field textarea {
-  border: none;
-  box-shadow: none
-}
-.task-detail-field input:focus,.task-detail-field input:hover,.task-detail-field textarea:focus,.task-detail-field textarea:hover {
-  border: none;
-  box-shadow: none
 }
