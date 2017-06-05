@@ -18,7 +18,6 @@ class MainTask extends Component {
       this.props.getFolderInfoByType(params.type);
     }
   }
-  // you type用type,没有用id
   componentWillReceiveProps(nextProps) {
     let nextparams = nextProps.route.params;
     let { folderInfo } = this.props;
