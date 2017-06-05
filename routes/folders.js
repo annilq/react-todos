@@ -46,21 +46,21 @@ router
     });
   })
   .delete(function(req, res) {
-    Folder.remove(
+    Task.remove(
       {
-        _id: req.params.id
+        folderId: req.params.id
       },
-      function(err, folder) {
+      function(err, task) {
         if (err) res.send(err);
-        console.log("目录删除成功");
-        Task.remove(
+        console.log("项目删除成功");
+        Folder.remove(
           {
-            folderId: req.params.id
+            _id: req.params.id
           },
-          function(err, folder) {
+          function(err, folders) {
             if (err) res.send(err);
-            console.log("项目删除成功");
-            res.json({ message: "项目删除成功" });
+            console.log("目录删除成功");
+            res.json({ code: 0, data: null, message: "目录删除成功" });
           }
         );
       }

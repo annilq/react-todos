@@ -1,4 +1,5 @@
 import Request from "../util/request";
+import { browserHistory } from "react-router";
 export function addFolder(name) {
   return function(dispatch, getState) {
     let state = getState();
@@ -33,10 +34,15 @@ export function updateFolder(name, id) {
 export function deleteFolder(id) {
   return function(dispatch, getState) {
     let state = getState();
-    let { folders } = state;
+    let { folders, folderInfo } = state;
     Request.delete(`/folders/${id}`).then(function(data) {
       folders = folders.filter(item => item._id !== id);
       dispatch({ type: "SET_FOLDERS", data: folders });
+      // 如果删除的目录是当前目录则跳转到主目录
+      if (folderInfo._id === id) {
+        dispatch(setFolderInfo(folders[0]));
+        browserHistory.replace("/home");
+      }
     });
   };
 }
