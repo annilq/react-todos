@@ -56,7 +56,7 @@ class TaskListHeader extends Component {
         <div className="folder-name">
           {folderInfo.name}
           <div className="logout">
-            <Icon type="logout" onClick={this.logout.bind(this)} />
+            <Icon type="logout" onClick={this.logout.bind(this)} title="退出登录"/>
           </div>
         </div>
         {addInputcom}
