@@ -154,7 +154,7 @@ p {
 .login-form {
   width: 360px;
   padding: 30px 20px;
-  margin: 300px auto 0;
+  margin: 18% auto 0;
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0 0 20px #666
@@ -226,7 +226,13 @@ p {
   flex: 1;
   overflow: hidden
 }
-
+.task-header{
+  border-bottom: 1px solid #999;
+}
+.task-header .logout{
+  float: right;
+  cursor: pointer;
+}
 .top-bar {
   position: relative;
 }
@@ -234,7 +240,6 @@ p {
 .top-bar .serach-input {
   display: inline-block;
   border: none;
-  border-bottom: 1px solid #999;
   border-radius: 0
 }
 

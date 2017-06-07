@@ -16,14 +16,14 @@ const routes = {
   indexRoute: { onEnter: (nextState, replace) => replace("home") },
   childRoutes: [
     {
+      path: "/login",
+      component: Login
+    },
+    {
       path: "/home",
       onEnter: requireAuth,
       params: { type: "home" },
       component: CSTasks
-    },
-    {
-      path: "/login",
-      component: Login
     },
     {
       path: "/star",

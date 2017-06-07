@@ -6,6 +6,7 @@ import {
   getFolderInfoByType,
   getFolderInfoById
 } from "../actions/actions";
+import FolderListContainer from "./folderlists";
 import TaskList from "./tasklists";
 import TaskListHeader from "./tasklistHeader";
 class MainTask extends Component {
@@ -34,9 +35,12 @@ class MainTask extends Component {
   render() {
     let { tasks } = this.props;
     return (
-      <div className="task-container" style={{ flex: 1 }}>
-        <TaskListHeader />
-        <TaskList tasks={tasks} />
+      <div className="container">
+        <FolderListContainer />
+        <div className="task-container" style={{ flex: 1 }}>
+          <TaskListHeader />
+          <TaskList tasks={tasks} />
+        </div>
       </div>
     );
   }

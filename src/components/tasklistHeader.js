@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { browserHistory } from "react-router";
 import { Input, Button, Icon } from "antd";
 import { addTask } from "../actions/actions";
+import Notify from "../util/notify";
 
 class TaskListHeader extends Component {
   constructor(props) {
@@ -17,10 +19,18 @@ class TaskListHeader extends Component {
   addTask() {
     let { folderInfo } = this.props;
     let { inputValue } = this.state;
+    if (!inputValue.trim()) {
+      Notify("warn", "请输入任务");
+      return;
+    }
     this.props.addTask(folderInfo._id, inputValue);
     this.setState({
       inputValue: ""
     });
+  }
+  logout() {
+    localStorage.removeItem("TOKEN");
+    browserHistory.replace("/login");
   }
   render() {
     let { folderInfo } = this.props;
@@ -43,7 +53,12 @@ class TaskListHeader extends Component {
     }
     return (
       <div className="task-header">
-        <div className="folder-name">{folderInfo.name}</div>
+        <div className="folder-name">
+          {folderInfo.name}
+          <div className="logout">
+            <Icon type="logout" onClick={this.logout.bind(this)} />
+          </div>
+        </div>
         {addInputcom}
       </div>
     );
