@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { browserHistory,Link } from "react-router";
+import { browserHistory, Link } from "react-router";
 import { Form, Icon, Input, Button } from "antd";
 const FormItem = Form.Item;
 
-class Login extends Component {
+class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -17,14 +17,12 @@ class Login extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="login-wrapper form-wrapper">
-        <Form onSubmit={this.handleSubmit} className="login-form">
+      <div className="register-wrapper form-wrapper">
+        <Form onSubmit={this.handleSubmit} className="register-form">
           <div className="app-title">react-todos</div>
           <FormItem>
             {getFieldDecorator("userName", {
-              rules: [
-                { required: true, message: "Please input your username!" }
-              ]
+              rules: [{ required: true, type: "email", message: "请输入用户名" }]
             })(
               <Input
                 prefix={<Icon type="user" style={{ fontSize: 13 }} />}
@@ -33,10 +31,19 @@ class Login extends Component {
             )}
           </FormItem>
           <FormItem>
+            {getFieldDecorator("email", {
+              rules: [{ required: true, message: "请输入邮箱" }]
+            })(
+              <Input
+                prefix={<Icon type="mail" style={{ fontSize: 13 }} />}
+                type="email"
+                placeholder="Email"
+              />
+            )}
+          </FormItem>
+          <FormItem>
             {getFieldDecorator("password", {
-              rules: [
-                { required: true, message: "Please input your Password!" }
-              ]
+              rules: [{ required: true, message: "请输入密码" }]
             })(
               <Input
                 prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
@@ -51,9 +58,9 @@ class Login extends Component {
               htmlType="submit"
               className="form-button"
             >
-              登录
+              注册
             </Button>
-            <Link to="/register">马上注册</Link>
+            <Link to="/login">返回登录</Link>
           </FormItem>
         </Form>
       </div>
@@ -61,5 +68,5 @@ class Login extends Component {
   }
 }
 
-const WrappedLogin = Form.create()(Login);
-export default WrappedLogin;
+const WrappedRegister = Form.create()(Register);
+export default WrappedRegister;

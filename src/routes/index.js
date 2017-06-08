@@ -2,6 +2,7 @@
 import App from "../App";
 import CSTasks from "../components/tasksContainer";
 import Login from "../components/login";
+import Register from "../components/register";
 function requireAuth(nextState, replace) {
   const token = localStorage.getItem("TOKEN");
   if (!token) {
@@ -18,6 +19,10 @@ const routes = {
     {
       path: "/login",
       component: Login
+    },
+    {
+      path: "/register",
+      component: Register
     },
     {
       path: "/home",

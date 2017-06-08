@@ -2,31 +2,38 @@ var express = require("express");
 var app = express();
 var cors = require("cors");
 var bodyParser = require("body-parser");
+var session = require("express-session");
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.use(express.static('build'))
+app.use(express.static("build"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-
-app.set("port",process.env.PORT || 8080) // set our port
+app.use(
+  session({
+    secret: "annilq",
+    saveUninitialized: true,
+    resave: false
+  })
+);
+app.set("port", process.env.PORT || 8080); // set our port
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/react-todos");
 // 初始化数据库
-require('./initdb/initdb')();
+require("./initdb/initdb")();
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-var routee = require('./routes');
-routee(app)
+var routee = require("./routes");
+routee(app);
 // START THE SERVER
 // =============================================================================
-app.get('*', (req, res) => {
-  res.sendFile(__dirname + '/build/index.html')
-})
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + "/build/index.html");
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -35,10 +42,10 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get("env") === "development") {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
+    res.render("error", {
       message: err.message,
       error: err
     });
@@ -49,12 +56,11 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  res.render("error", {
     message: err.message,
     error: {}
   });
 });
-
 
 app.listen(app.get("port"));
 // var server = http.createServer(app);

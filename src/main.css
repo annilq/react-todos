@@ -79,10 +79,12 @@ input::-moz-focus-inner {
   border: 0;
   padding: 0
 }
-input:-webkit-autofill,textarea:-webkit-autofill,select:-webkit-autofill {
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   box-shadow: 0;
   background-color: transparent
 }
+
 input[type=checkbox], input[type=radio] {
   box-sizing: border-box;
   padding: 0
@@ -141,32 +143,42 @@ p {
   color: #333;
   font-size: 24px;
 }
-.app-title{
+
+.app-title {
   margin-bottom: 20px;
   font-size: 44px;
   font-weight: bold;
   text-align: center;
 }
-.login-wrapper{
+
+.form-wrapper {
   width: 100%;
   height: 100%;
 }
-.login-form {
+
+.register-form, .login-form {
   width: 360px;
   padding: 30px 20px;
-  margin: 18% auto 0;
+  margin: 15% auto 0;
   background-color: #fafafa;
   border-radius: 10px;
   box-shadow: 0 0 20px #666
 }
-.login-form input{
+
+.register-form {
+  margin: 12% auto 0;
+}
+
+.register-form input, .login-form input {
   height: 40px;
   line-height: 40px;
   background-color: #fff
 }
-.login-form-button {
+
+.form-button {
   width: 100%;
 }
+
 .folder-name {
   font-size: 18px;
 }
@@ -189,11 +201,13 @@ p {
   padding: 0 10px;
   cursor: pointer;
 }
-.delete-folder{
+
+.delete-folder {
   position: absolute;
   left: 15px;
   bottom: 10px;
 }
+
 .folder-list li.active, .folder-list li:hover {
   color: #0074bf
 }
@@ -212,9 +226,11 @@ p {
 .folder-list .edit-folder {
   display: none;
 }
+
 .folder-list li:hover .edit-folder {
   display: block;
 }
+
 .left-folder .add-folder-btn {
   margin: 10px auto;
   display: block;
@@ -226,13 +242,16 @@ p {
   flex: 1;
   overflow: hidden
 }
-.task-header{
+
+.task-header {
   border-bottom: 1px solid #999;
 }
-.task-header .logout{
+
+.task-header .logout {
   float: right;
   cursor: pointer;
 }
+
 .top-bar {
   position: relative;
 }
@@ -264,18 +283,21 @@ p {
   cursor: pointer;
   user-select: none;
 }
-.task-list li .edit-item input{
+
+.task-list li .edit-item input {
   border: none;
   border-radius: 0;
   box-shadow: none;
   display: block;
   width: 100%
 }
-.task-button{
+
+.task-button {
   text-align: right;
   width: 100px;
   overflow: hidden;
 }
-.edit-button,.delete-button{
+
+.edit-button, .delete-button {
   margin-right: 10px;
 }
