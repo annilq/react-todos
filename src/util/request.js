@@ -1,5 +1,6 @@
 import axios from "axios";
 import Spiner from "./spin";
+import { browserHistory, Link } from "react-router";
 import Notify from "./notify";
 let Request = {};
 axios.defaults.baseURL = "http://127.0.0.1:8080/api";
@@ -35,7 +36,9 @@ Request.get = function(url, param = {}) {
       .get(url, { params: param })
       .then(function(response) {
         if (response.data) {
-          if (response.data.code === 0) {
+          if (response.data.code === -2) {
+            Request.logout();
+          } else if (response.data.code === 0) {
             resolve(response.data.data);
           } else {
             console.log("ajax info", response.data);
@@ -56,7 +59,9 @@ Request.delete = function(url) {
       .delete(url)
       .then(function(response) {
         if (response.data) {
-          if (response.data.code === 0) {
+          if (response.data.code === -2) {
+            Request.logout();
+          } else if (response.data.code === 0) {
             resolve(response.data.data);
           } else {
             console.log("ajax info", response.data);
@@ -77,7 +82,9 @@ Request.put = function(url, data = {}) {
       .put(url, data)
       .then(function(response) {
         if (response.data) {
-          if (response.data.code === 0) {
+          if (response.data.code === -2) {
+            Request.logout();
+          } else if (response.data.code === 0) {
             resolve(response.data.data);
           } else {
             console.log("ajax info", response.data);
@@ -98,7 +105,9 @@ Request.post = function(url, data = {}) {
       .post(url, data)
       .then(function(response) {
         if (response.data) {
-          if (response.data.code === 0) {
+          if (response.data.code === -2) {
+            Request.logout();
+          } else if (response.data.code === 0) {
             resolve(response.data.data);
           } else {
             Notify("error", response.data.message);
@@ -113,5 +122,9 @@ Request.post = function(url, data = {}) {
       });
   });
   return promise;
+};
+Request.logout = function() {
+  Notify("warn", "登录过期，请重新登录");
+  browserHistory.replace("/login");
 };
 export default Request;

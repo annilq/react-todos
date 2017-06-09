@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { browserHistory } from "react-router";
 import { Input, Button, Icon } from "antd";
 import { addTask } from "../actions/actions";
+import Request from "../util/request";
 import Notify from "../util/notify";
 
 class TaskListHeader extends Component {
@@ -29,8 +30,10 @@ class TaskListHeader extends Component {
     });
   }
   logout() {
-    localStorage.removeItem("TOKEN");
-    browserHistory.replace("/login");
+    Request.get("/logout").then(function(data) {
+      Notify("info", "退出登录");
+      browserHistory.replace("/login");
+    });
   }
   render() {
     let { folderInfo } = this.props;
@@ -56,7 +59,7 @@ class TaskListHeader extends Component {
         <div className="folder-name">
           {folderInfo.name}
           <div className="logout">
-            <Icon type="logout" onClick={this.logout.bind(this)} title="退出登录"/>
+            <Icon type="logout" onClick={this.logout.bind(this)} title="退出登录" />
           </div>
         </div>
         {addInputcom}

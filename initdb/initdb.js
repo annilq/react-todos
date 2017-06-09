@@ -23,7 +23,7 @@ function setIndexFolder() {
       folder.name = folderItem.name; // set the folders name
       folder.fixed = folderItem.fixed; // set the folders fixed
       folder.type = folderItem.type; // set the folders type
-      folder.save(function(err,folder) {
+      folder.save(function(err, folder) {
         if (err) reject(err);
         resolve(folder);
       });
@@ -36,9 +36,7 @@ function initdb() {
   Folder.find(function(err, folders) {
     if (err) res.send(err);
     if (folders.length < 1) {
-      Promise.all(setIndexFolder()).then(function(folders) {
-        console.log(folders);
-      });
+      Promise.all(setIndexFolder()).then(function(folders) {});
     }
   });
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { browserHistory, Link } from "react-router";
 import { Form, Icon, Input, Button } from "antd";
+import Request from "../util/request";
 const FormItem = Form.Item;
 
 class Register extends Component {
@@ -8,9 +9,9 @@ class Register extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
-        localStorage.setItem("TOKEN", "TOKEN");
-        browserHistory.replace("/");
+        Request.post("/register", values).then(function(data) {
+          browserHistory.replace("/login");
+        });
       }
     });
   };
@@ -21,23 +22,23 @@ class Register extends Component {
         <Form onSubmit={this.handleSubmit} className="register-form">
           <div className="app-title">react-todos</div>
           <FormItem>
-            {getFieldDecorator("userName", {
-              rules: [{ required: true, type: "email", message: "请输入用户名" }]
+            {getFieldDecorator("name", {
+              rules: [{ required: true, message: "请输入用户名" }]
             })(
               <Input
                 prefix={<Icon type="user" style={{ fontSize: 13 }} />}
-                placeholder="Username"
+                placeholder="用户名"
               />
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator("email", {
-              rules: [{ required: true, message: "请输入邮箱" }]
+              rules: [{ required: true, type: "email", message: "请输入邮箱" }]
             })(
               <Input
                 prefix={<Icon type="mail" style={{ fontSize: 13 }} />}
                 type="email"
-                placeholder="Email"
+                placeholder="邮箱"
               />
             )}
           </FormItem>
@@ -48,16 +49,12 @@ class Register extends Component {
               <Input
                 prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
                 type="password"
-                placeholder="Password"
+                placeholder="密码"
               />
             )}
           </FormItem>
           <FormItem>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="form-button"
-            >
+            <Button type="primary" htmlType="submit" className="form-button">
               注册
             </Button>
             <Link to="/login">返回登录</Link>

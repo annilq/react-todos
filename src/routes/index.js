@@ -3,18 +3,10 @@ import App from "../App";
 import CSTasks from "../components/tasksContainer";
 import Login from "../components/login";
 import Register from "../components/register";
-function requireAuth(nextState, replace) {
-  const token = localStorage.getItem("TOKEN");
-  if (!token) {
-    replace({
-      pathname: "/login"
-    });
-  }
-}
 const routes = {
   path: "/",
   component: App,
-  indexRoute: { onEnter: (nextState, replace) => replace("/home") },
+  indexRoute: { onEnter: (nextState, replace) => replace("/login") },
   childRoutes: [
     {
       path: "/login",
@@ -26,25 +18,21 @@ const routes = {
     },
     {
       path: "/home",
-      onEnter: requireAuth,
       params: { type: "home" },
       component: CSTasks
     },
     {
       path: "/star",
-      onEnter: requireAuth,
       params: { type: "star", query: { star: true } },
       component: CSTasks
     },
     {
       path: "/done",
-      onEnter: requireAuth,
       params: { type: "done", query: { status: 1 } },
       component: CSTasks
     },
     {
       path: "/folders/:id",
-      onEnter: requireAuth,
       component: CSTasks
     },
     {
