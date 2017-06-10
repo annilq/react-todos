@@ -1,5 +1,6 @@
 var express = require("express");
 var Task = require("../models/tasks");
+var Folder = require("../models/folders");
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -11,6 +12,7 @@ router
   .post(function(req, res) {
     var task = new Task(); // create a new instance of the Bear model
     task.name = req.body.name; // set the tasks name (comes from the request)
+    task.userId = req.session.uid; // set the tasks name (comes from the request)
     if (req.body.id) {
       task.folderId = req.body.id;
     }
@@ -22,7 +24,8 @@ router
     });
   })
   .get(function(req, res) {
-    Task.find(req.query, function(err, tasks) {
+    var query = Object.assign({ userId: req.session.uid }, req.query);
+    Task.find(query, function(err, tasks) {
       if (err) res.send(err);
       res.json({ code: 0, data: tasks, message: "" });
     });
