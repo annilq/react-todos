@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { browserHistory, Link } from "react-router";
 import { Form, Icon, Input, Button } from "antd";
+import Notify from "../util/notify";
 import Request from "../util/request";
 const FormItem = Form.Item;
 
@@ -11,6 +12,7 @@ class Register extends Component {
       if (!err) {
         Request.post("/register", values).then(function(data) {
           browserHistory.replace("/login");
+          Notify("success", "注册成功");
         });
       }
     });

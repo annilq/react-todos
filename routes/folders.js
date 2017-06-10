@@ -9,6 +9,7 @@ router
   // create a folder (accessed at POST http://localhost:8080/api/folders)
   .post(function(req, res) {
     var folder = new Folder(); // create a new instance of the Folder model
+    folder.userId = req.session.uid; // set the folders name (comes from the request)
     folder.name = req.body.name; // set the folders name (comes from the request)
     console.log(folder.name);
     // save the folder and check for errors
@@ -18,7 +19,8 @@ router
     });
   })
   .get(function(req, res) {
-    Folder.find(req.query, function(err, folders) {
+    var query = Object.assign({ userId: req.session.uid }, req.query);
+    Folder.find(query, function(err, folders) {
       if (err) res.send(err);
       res.json({ code: 0, data: folders, message: "" });
     });

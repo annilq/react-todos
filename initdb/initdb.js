@@ -1,5 +1,5 @@
 var Folder = require("../models/folders");
-function setIndexFolder() {
+function setIndexFolder(uid) {
   var indexFolder = [
     {
       name: "home",
@@ -20,6 +20,7 @@ function setIndexFolder() {
   let promises = indexFolder.map(function(folderItem) {
     let promise = new Promise(function(resolve, reject) {
       var folder = new Folder(); // create a new instance of the Folder model
+      folder.userId = uid; // set the folders name
       folder.name = folderItem.name; // set the folders name
       folder.fixed = folderItem.fixed; // set the folders fixed
       folder.type = folderItem.type; // set the folders type
@@ -32,11 +33,11 @@ function setIndexFolder() {
   });
   return promises;
 }
-function initdb() {
-  Folder.find(function(err, folders) {
+function initdb(uid) {
+  Folder.find({ userId: uid }, function(err, folders) {
     if (err) res.send(err);
     if (folders.length < 1) {
-      Promise.all(setIndexFolder()).then(function(folders) {});
+      Promise.all(setIndexFolder(uid)).then(function(folders) {});
     }
   });
 }

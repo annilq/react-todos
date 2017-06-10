@@ -11,7 +11,6 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         Request.post("/login", values).then(function(data) {
-          console.log(data);
           browserHistory.replace("/home");
           Notify("success", "登陆成功");
         });

@@ -1,6 +1,6 @@
 import axios from "axios";
 import Spiner from "./spin";
-import { browserHistory, Link } from "react-router";
+import { browserHistory } from "react-router";
 import Notify from "./notify";
 let Request = {};
 axios.defaults.baseURL = "http://127.0.0.1:8080/api";

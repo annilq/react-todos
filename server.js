@@ -3,30 +3,29 @@ var app = express();
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var session = require("express-session");
-
+const MongoStore = require("connect-mongo")(session);
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(express.static("build"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.set("port", process.env.PORT || 8080); // set our port
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost:27017/react-todos");
 app.use(
   session({
     secret: "annilq",
     saveUninitialized: true,
-    resave: false
+    resave: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
-app.set("port", process.env.PORT || 8080); // set our port
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/react-todos");
-// 初始化数据库
-require("./initdb/initdb")();
+
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
-var routee = require("./routes");
-routee(app);
-// START THE SERVER
+var route = require("./routes");
+route(app);
 // =============================================================================
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
@@ -61,7 +60,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+// START THE SERVER
 app.listen(app.get("port"));
 // var server = http.createServer(app);
 // var boot = function () {
