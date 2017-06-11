@@ -1,7 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcrypt");
 var User = require("../../models/user");
-var initDb = require("../../initdb/initdb");
+var initfolders = require("../../initdb/initdb");
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -23,8 +23,8 @@ router
         bcrypt.hash(user.password, data.salt, function(err, hash) {
           if (hash === data.password) {
             req.session.uid = data._id;
-            // 初始化数据库
-            initDb(req.session.uid);
+            // 登录成功后配置用户默认目录
+            initfolders(req.session.uid);
             res.json({ code: 0, data: user, message: "登录成功" });
           } else {
             res.json({ code: -1, message: "密码错误" });

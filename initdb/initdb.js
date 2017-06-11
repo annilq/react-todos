@@ -33,7 +33,7 @@ function setIndexFolder(uid) {
   });
   return promises;
 }
-function initdb(uid) {
+function initfolders(uid) {
   Folder.find({ userId: uid }, function(err, folders) {
     if (err) res.send(err);
     if (folders.length < 1) {
@@ -41,4 +41,4 @@ function initdb(uid) {
     }
   });
 }
-module.exports = initdb;
+module.exports = initfolders;
