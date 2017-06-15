@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+var db = require("../initdb/initdb")();
+var program = require("commander");
+
+// 命令版本号
+program.version("0.0.1");
+
+// help命令
+program.command("help").description("显示使用帮助").action(function() {
+  program.outputHelp();
+});
+
+// 登录
+program
+  .command("login <username:password>")
+  .description("用户登录")
+  .action(require("../lib/cmd/cmd_login"));
+// 显示所有目录或者当前目录所有项目
+program
+  .command("show [folder]")
+  .description("切换到该目录")
+  .action(require("../lib/cmd/cmd_show_item"));
+// 创建新的目录(创建新的待办事项)
+program
+  .command("create <folder|todo> <name>")
+  .description("创建一个新的目录或者项目")
+  .action(require("../lib/cmd/cmd_create_item"));
+// 开始解析命令
+program.parse(process.argv);
+if (!program.args.length) program.help();
