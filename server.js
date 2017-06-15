@@ -11,8 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.set("port", process.env.PORT || 8080); // set our port
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/react-todos");
+var mongoose = require("./initdb/initdb")();
 app.use(
   session({
     secret: "annilq",

@@ -1,7 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcrypt");
 var User = require("../../models/user");
-var initfolders = require("../../initdb/initdb");
+var initfolders = require("../../initdb/initfolder");
 
 // ROUTES FOR OUR API
 // =============================================================================
