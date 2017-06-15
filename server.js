@@ -11,13 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.set("port", process.env.PORT || 8080); // set our port
-var mongoose = require("./initdb/initdb")();
+var db = require("./initdb/initdb")();
 app.use(
   session({
     secret: "annilq",
     saveUninitialized: true,
     resave: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: new MongoStore({ mongooseConnection: db.connection })
   })
 );
 
