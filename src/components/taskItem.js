@@ -15,7 +15,6 @@ class TaskItem extends Component {
     };
   }
   showEditView(id) {
-    console.log(this.refs[id]);
     this.setState({ edit: !this.state.edit });
     let dom = this.refs[id];
     // dom.focus()
