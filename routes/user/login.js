@@ -1,7 +1,7 @@
 var express = require("express");
 var bcrypt = require("bcrypt");
 var User = require("../../models/user");
-var initfolders = require("../../initdb/initfolder");
+var Folder = require("../../lib/folder");
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -24,7 +24,7 @@ router
           if (hash === data.password) {
             req.session.uid = data._id;
             // 登录成功后配置用户默认目录
-            initfolders(req.session.uid);
+            Folder.initfolders(req.session.uid);
             res.json({ code: 0, data: user, message: "登录成功" });
           } else {
             res.json({ code: -1, message: "密码错误" });
