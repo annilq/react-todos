@@ -40,7 +40,9 @@ export function deleteFolder(id) {
       dispatch({ type: "SET_FOLDERS", data: folders });
       // 如果删除的目录是当前目录则跳转到主目录
       if (folderInfo._id === id) {
-        dispatch(setFolderInfo(folders[0]));
+        dispatch(
+          setFolderInfo(folders.filter(item => item.type === "home")[0])
+        );
         browserHistory.replace("/home");
       }
     });
