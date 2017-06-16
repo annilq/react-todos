@@ -17,6 +17,11 @@ class TaskListHeader extends Component {
     let value = e.target.value;
     this.setState({ inputValue: value });
   }
+  handleInputPress(event) {
+    if (event.key === "Enter") {
+      this.addTask();
+    }
+  }
   addTask() {
     let { folderInfo } = this.props;
     let { inputValue } = this.state;
@@ -47,6 +52,7 @@ class TaskListHeader extends Component {
             className="serach-input"
             value={this.state.inputValue}
             onChange={this.handleInput.bind(this)}
+            onKeyPress={this.handleInputPress.bind(this)}
           />
           <Button className="new-note" onClick={this.addTask.bind(this)}>
             <Icon type="plus" />添加
