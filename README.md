@@ -20,4 +20,12 @@ tips: 项目前端UI由create-react-app创建,可以直接运行npm start进行�
   - star
   - 标记状态
 
-#### 新增命令行功能
+#### 新增命令行功能命令行只能查看,做不好心塞
+npm link 命令全局可用
+todo help 看方法
+1. 登录：todo login <user:pass>
+  >ps:首先在web端注册,之后一定要先登录才能继续后续操作，而且没有错误提示
+1. 看所有目录：todo show
+2. 查看执行目录任务：todo show <folderName>
+3. 已完成任务：todo done
+4. 关注的任务：todo star

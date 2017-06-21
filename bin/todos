@@ -22,11 +22,6 @@ program
   .action(require("../lib/cmd/cmd_show_item"));
 // 创建新的目录(创建新的待办事项)
 program
-  .command("create <folder|todo> <name>")
-  .description("创建一个新的目录或者项目")
-  .action(require("../lib/cmd/cmd_create_item"));
-// 创建新的目录(创建新的待办事项)
-program
   .command("done")
   .description("显示已经完成任务")
   .action(require("../lib/cmd/cmd_show_done"));
