@@ -1,19 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 import TaskItem from "./taskItem";
 function TaskList({ tasks }) {
-  let taskList;
-  if (tasks.length > 0) {
-    taskList = tasks.map((item, index) => (
-      <TaskItem key={item._id} task={item} />
-    ));
-  } else {
-    taskList = <div className="no-data">没有数据</div>;
-  }
+  let taskList = tasks.map((item, index) => (
+    <TaskItem key={item._id} task={item} />
+  ));
   return (
     <ul className="task-list">
-      {taskList}
+      {taskList || "没有数据"}
     </ul>
   );
 }
-
-export default TaskList;
+const mapStateToProps = ({ tasks }) => {
+  return {
+    tasks
+  };
+};
+export default connect(mapStateToProps)(TaskList);

@@ -33,21 +33,19 @@ class MainTask extends Component {
     }
   }
   render() {
-    let { tasks } = this.props;
     return (
       <div className="container">
         <FolderListContainer />
         <div className="task-container" style={{ flex: 1 }}>
           <TaskListHeader />
-          <TaskList tasks={tasks} />
+          <TaskList />
         </div>
       </div>
     );
   }
 }
-const mapStateToProps = ({ tasks, folderInfo }) => {
+const mapStateToProps = ({ folderInfo }) => {
   return {
-    tasks,
     folderInfo
   };
 };
@@ -67,5 +65,4 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-let MainTaskContainer = connect(mapStateToProps, mapDispatchToProps)(MainTask);
-export default MainTaskContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(MainTask);
