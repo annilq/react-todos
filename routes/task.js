@@ -7,15 +7,13 @@ var router = express.Router(); // get an instance of the express Router
 router
   .route("/")
   // create a task (accessed at POST http://localhost:8080/api/tasks)
-  .post(function(req, res) {
-    Task.post(req.session.uid, req.body.id, req.body.name).then(
-      function(task) {
-        res.json({ code: 0, data: task, message: "添加成功" });
-      },
-      function(err) {
-        if (err) res.send(err);
-      }
-    );
+  .post(async function(req, res) {
+    let task = await Task.post(req.session.uid, req.body.id, req.body.name);
+    if (task) {
+      res.json({ code: 0, data: task, message: "添加成功" });
+    } else if (err) {
+      res.send(err);
+    }
   })
   .get(function(req, res) {
     Task.getTasks(req.session.uid, req.query).then(

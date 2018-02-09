@@ -12,15 +12,14 @@ router
   // create a user (accessed at POST http://localhost:8080/api/users)
   .post(function(req, res) {
     // 生成10个字符的盐
-    User.login(req.body.name, req.body.password).then(
-      function(uid) {
+    User.login(req.body.name, req.body.password)
+      .then(function(uid) {
         req.session.uid = uid;
         Folder.initfolders(uid);
         res.json({ code: 0, data: uid, message: "登录成功" });
-      },
-      function(msg) {
+      })
+      .catch(function(msg) {
         res.json({ code: -1, message: msg });
-      }
-    );
+      });
   });
 module.exports = router;
