@@ -1,3 +1,3 @@
 module.exports = {
-  url: "mongodb://localhost:27017/react-todos"
+  url: "mongodb://annilq:123456liu@ds145299.mlab.com:45299/react-todo"
 };
