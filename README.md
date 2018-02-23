@@ -11,7 +11,6 @@
 tips: 项目前端UI由create-react-app创建,可以直接运行npm start进行开发，开发完成后运行npm run build 打包
 
 
-#### [线上地址](https://sleepy-ravine-72939.herokuapp.com/)
 #### 功能模块：
 - 注册、登录、验证
 - 清单列表
