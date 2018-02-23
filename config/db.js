@@ -1,3 +1,4 @@
 module.exports = {
-  url: "mongodb://annilq:123456liu@ds145299.mlab.com:45299/react-todo"
+  proUrl: "mongodb://react-user:react-psw@ds147905.mlab.com:47905/react-todo",
+  devUrl: "mongodb://localhost:27017/react-todos"
 };
